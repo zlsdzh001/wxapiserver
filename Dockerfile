@@ -10,7 +10,7 @@ RUN go mod tidy
 
 RUN CGO_ENABLED=0 GOOS=linux go build --ldflags="-s -w" -o apiserverd main.go
 
-FROM furacas/wine-vnc-box:latest
+FROM zlsdzh001/wine-vnc-box:latest
 
 # 清理环境
 RUN sudo rm -rf /tmp/.X0-lock
