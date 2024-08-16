@@ -25,7 +25,7 @@ ARG WXHELPER_URL=https://github.com/ttttupup/wxhelper/releases/download/3.9.5.81
 WORKDIR /home/app/.wine/drive_c
 
 # 加载注入器
-ADD https://github.com/furacas/DllInjector/releases/download/v1.4.0/DllInjector64.exe DllInjector.exe
+ADD DllInjector.exe DllInjector.exe
 RUN sudo chown app:app DllInjector.exe && sudo chmod a+x DllInjector.exe
 
 # 下载微信
