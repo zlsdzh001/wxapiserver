@@ -8,7 +8,7 @@ sleep 10
 
 if [ -d "/home/app/.wine/drive_c/Program Files/Tencent" ]; then
   echo '启动64位微信'
-  wine64 'C:\Program Files\Tencent\WeChat\WeChat.exe' &
+  wine 'C:\Program Files\Tencent\WeChat\WeChat.exe' &
 else
   echo '启动32位微信'
   wine 'C:\Program Files (x86)\Tencent\WeChat\WeChat.exe' &
@@ -21,7 +21,7 @@ inject_fake_wechat_version() {
       pid=$(lsof -i :19088 | grep "LISTEN" | awk '{print $2}')
       if [ -n "$pid" ]; then
           echo "WeChat is running, pid: $pid"
-          wine64 'C:\faker.exe' "$pid" '3.9.5.81' '3.9.10.19'
+          wine 'C:\faker.exe' "$pid" '3.9.5.81' '3.9.11.25'
           echo "inject process done"
           break
       else
@@ -33,6 +33,6 @@ inject_fake_wechat_version() {
 
 inject_fake_wechat_version &
 
-wine64 'C:\DllInjector.exe' 'C:\wxhelper.dll' WeChat.exe 2>&1
+wine 'C:\DllInjector.exe' 'C:\wxhelper.dll' WeChat.exe 2>&1
 
 wait
