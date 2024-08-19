@@ -16,6 +16,12 @@ fi
 
 sleep 10
 
+wine 'C:\DllInjector.exe' 'C:\wxhelper.dll' WeChat.exe 2>&1
+
+echo 'DllInjector wxhelper.dll end.'
+
+sleep 5
+
 inject_fake_wechat_version() {
   while true; do
       pid=$(lsof -i :19088 | grep "LISTEN" | awk '{print $2}')
@@ -32,7 +38,5 @@ inject_fake_wechat_version() {
 }
 
 inject_fake_wechat_version &
-
-wine 'C:\DllInjector.exe' 'C:\wxhelper.dll' WeChat.exe 2>&1
 
 wait
