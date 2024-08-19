@@ -4,7 +4,7 @@ sudo mv /home/app/.wine/drive_c/apiserver.conf /etc/supervisord.d/apiserver.conf
 
 exec sudo -E bash -c 'supervisord -c /etc/supervisord.conf -l /var/log/supervisord.log' &
 
-sleep 10
+sleep 30
 
 if [ -d "/home/app/.wine/drive_c/Program Files/Tencent" ]; then
   echo '启动64位微信'
@@ -14,13 +14,13 @@ else
   wine 'C:\Program Files (x86)\Tencent\WeChat\WeChat.exe' &
 fi
 
-sleep 10
+sleep 30
 
 wine 'C:\DllInjector.exe' 'C:\wxhelper.dll' WeChat.exe 2>&1
 
 echo 'DllInjector wxhelper.dll end.'
 
-sleep 5
+sleep 15
 
 inject_fake_wechat_version() {
   while true; do
