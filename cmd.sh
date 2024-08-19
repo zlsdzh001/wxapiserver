@@ -14,13 +14,9 @@ else
   wine 'C:\Program Files (x86)\Tencent\WeChat\WeChat.exe' &
 fi
 
-sleep 30
-
 wine 'C:\DllInjector.exe' 'C:\wxhelper.dll' WeChat.exe 2>&1
 
 echo 'DllInjector wxhelper.dll end.'
-
-sleep 15
 
 inject_fake_wechat_version() {
   while true; do
