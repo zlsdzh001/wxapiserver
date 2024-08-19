@@ -1,4 +1,4 @@
-FROM golang:1.22 as builder
+FROM golang:1.22 AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ RUN go mod tidy
 
 RUN CGO_ENABLED=0 GOOS=linux go build --ldflags="-s -w" -o apiserverd main.go
 
-FROM zlsdzh001/wine-vnc-box:latest
+FROM furacas/wine-vnc-box:latest
 
 # 清理环境
 RUN sudo rm -rf /tmp/.X0-lock
@@ -49,6 +49,7 @@ RUN rm -rf WeChatSetup.exe && rm -rf install-wechat.sh
 EXPOSE 5900 19088
 
 COPY faker.exe faker.exe
+RUN sudo chown app:app faker.exe && sudo chmod a+x faker.exe
 
 COPY cmd.sh /cmd.sh
 
