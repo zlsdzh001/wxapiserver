@@ -48,20 +48,22 @@ COPY --from=builder /app/apiserver.conf /home/app/.wine/drive_c/apiserver.conf
 
 COPY --from=builder /app/apiserverd /home/app/.wine/drive_c/apiserverd
 
+
 ADD msyh.ttc msyh.ttc
 ADD msyhbd.ttc msyhbd.ttc
 ADD msyhl.ttc msyhl.ttc
-RUN sudo mv msyh* /home/app/.wine/drive_c/windows/Fonts && sudo chown app:app /home/app/.wine/drive_c/windows/Fonts/msyh*
-
 ADD font.reg font.reg
-RUN regedit msyh_font.reg
 
-USER app
 
 EXPOSE 5900 19088
+
+USER app
 
 COPY cmd.sh /cmd.sh
 
 RUN sudo chmod +x /cmd.sh
+
+RUN sudo mv msyh* /home/app/.wine/drive_c/windows/Fonts && sudo chown app:app /home/app/.wine/drive_c/windows/Fonts/msyh* && regedit font.reg
+
 
 CMD ["/cmd.sh"]
