@@ -35,11 +35,6 @@ RUN sudo chown app:app faker.exe && sudo chmod a+x faker.exe
 ADD ${WECHAT_URL} WeChatSetup.exe
 RUN sudo chown app:app WeChatSetup.exe  && sudo chmod a+x WeChatSetup.exe
 
-ADD MSYH.TTC MSYH.TTC
-ADD MSYH.TTC MSYHBD.TTC
-ADD MSYH.TTC MSYHL.TTC
-RUN sudo mv MSYH* /home/app/.wine/drive_c/windows/Fonts && sudo chown app:app /home/app/.wine/drive_c/windows/Fonts/MSYH*
-
 # 下载wxhelper.dll
 ADD ${WXHELPER_URL} wxhelper.dll
 RUN sudo chown app:app wxhelper.dll
@@ -52,6 +47,14 @@ RUN sudo chmod a+x install-wechat.sh && ./install-wechat.sh && rm -rf WeChatSetu
 COPY --from=builder /app/apiserver.conf /home/app/.wine/drive_c/apiserver.conf
 
 COPY --from=builder /app/apiserverd /home/app/.wine/drive_c/apiserverd
+
+ADD msyh.ttc msyh.ttc
+ADD msyhbd.ttc msyhbd.ttc
+ADD msyhl.ttc msyhl.ttc
+RUN sudo mv msyh* /home/app/.wine/drive_c/windows/Fonts && sudo chown app:app /home/app/.wine/drive_c/windows/Fonts/msyh*
+
+ADD font.reg font.reg
+RUN regedit msyh_font.reg
 
 USER app
 
